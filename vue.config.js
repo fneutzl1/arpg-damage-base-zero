@@ -1,5 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
+  publicPath: process.env.NODE_ENV === "production" ? "/arpg-damage-base-zero/" : "/",
   transpileDependencies: true,
   chainWebpack: (config) => {
     config.plugin('define').tap((definitions) => {
