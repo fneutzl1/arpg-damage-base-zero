@@ -1,0 +1,133 @@
+{
+  "balrog": {
+    "name": "Balrog",
+    "type": "balrog",
+    "life": 65000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 }
+    }
+  },
+  "mephisto": {
+    "name": "Mephisto",
+    "type": "mephisto",
+    "life": 500000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  },
+  "venom-lord": {
+    "name": "Venom Lord",
+    "type": "venom-lord",
+    "life": 65000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  },
+  "fallen": {
+    "name": "Fallen",
+    "type": "fallen",
+    "life": 5000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  },
+  "hell-bovine": {
+    "name": "Hell Bovine",
+    "type": "hell-bovine",
+    "life": 21000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  },
+  "fetish-shaman": {
+    "name": "Fetish Shaman",
+    "type": "fetish-shaman",
+    "life": 33000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  },
+  "moon-lord": {
+    "name": "Moon Lord",
+    "type": "moon-lord",
+    "life": 47000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  },
+  "uber-duriel": {
+    "name": "Uber Duriel",
+    "type": "uber-duriel",
+    "life": 650000,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  },
+  "uber-diablo": {
+    "name": "Uber Diablo",
+    "type": "uber-diablo",
+    "life": 642700,
+    "lifeLeft": null,
+    "lifeLeftResilience": null,
+    "caps": {
+      "physical": { "value": 50000 },
+      "fire": { "value": 50000 },
+      "cold": { "value": 50000 },
+      "poison": { "value": 50000 },
+      "lightning": { "value": 50000 },
+      "shadow": { "value": 50000 }
+    }
+  }
+}
