@@ -1,6 +1,7 @@
 {
   "name": "arpg-damage-example-site",
   "version": "0.1.0",
+  "homepage": "https://fneutzl1.github.io/arpg-damage-base-zero/",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
