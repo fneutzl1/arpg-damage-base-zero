@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
-    "baseUrl": "./arpg-damage-base-zero/",
+    "baseUrl": "./",
     "moduleResolution": "node",
     "paths": {
       "@/*": [
