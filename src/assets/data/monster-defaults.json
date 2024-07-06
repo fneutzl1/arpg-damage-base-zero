@@ -6,8 +6,8 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 }
+      "physical": { "value": 6600 },
+      "fire": { "value": 5000 }
     }
   },
   "mephisto": {
@@ -17,12 +17,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 21000 },
+      "fire": { "value": 5000 },
+      "cold": { "value": 5000 },
+      "poison": { "value": 5000 },
+      "lightning": { "value": 5000 },
+      "shadow": { "value": 5000 }
     }
   },
   "venom-lord": {
@@ -32,12 +32,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 5500 },
+      "fire": { "value": 5000 },
+      "cold": { "value": 5000 },
+      "poison": { "value": 5000 },
+      "lightning": { "value": 5000 },
+      "shadow": { "value": 5000 }
     }
   },
   "fallen": {
@@ -47,12 +47,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 500 },
+      "fire": { "value": 1000 },
+      "cold": { "value": 1000 },
+      "poison": { "value": 1000 },
+      "lightning": { "value": 1000 },
+      "shadow": { "value": 1000 }
     }
   },
   "hell-bovine": {
@@ -62,12 +62,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 3300 },
+      "fire": { "value": 5000 },
+      "cold": { "value": 5000 },
+      "poison": { "value": 5000 },
+      "lightning": { "value": 5000 },
+      "shadow": { "value": 5000 }
     }
   },
   "fetish-shaman": {
@@ -77,12 +77,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 700 },
+      "fire": { "value": 5000 },
+      "cold": { "value": 5000 },
+      "poison": { "value": 5000 },
+      "lightning": { "value": 5000 },
+      "shadow": { "value": 5000 }
     }
   },
   "moon-lord": {
@@ -92,12 +92,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 9000 },
+      "fire": { "value": 5000 },
+      "cold": { "value": 5000 },
+      "poison": { "value": 5000 },
+      "lightning": { "value": 5000 },
+      "shadow": { "value": 5000 }
     }
   },
   "uber-duriel": {
@@ -107,12 +107,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 51234 },
+      "fire": { "value": 5000 },
+      "cold": { "value": 5000 },
+      "poison": { "value": 5000 },
+      "lightning": { "value": 5000 },
+      "shadow": { "value": 5000 }
     }
   },
   "uber-diablo": {
@@ -122,12 +122,12 @@
     "lifeLeft": null,
     "lifeLeftResilience": null,
     "caps": {
-      "physical": { "value": 50000 },
-      "fire": { "value": 50000 },
-      "cold": { "value": 50000 },
-      "poison": { "value": 50000 },
-      "lightning": { "value": 50000 },
-      "shadow": { "value": 50000 }
+      "physical": { "value": 59876 },
+      "fire": { "value": 5000 },
+      "cold": { "value": 5000 },
+      "poison": { "value": 5000 },
+      "lightning": { "value": 5000 },
+      "shadow": { "value": 5000 }
     }
   }
 }

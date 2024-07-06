@@ -42,22 +42,14 @@
       </span>
     </template> -->
 
-    <DamageForm :monsters="monsters"></DamageForm>
-
-    <button
-      v-if="this.monsters.length > 0"
-      @click="deleteAllMonsters()"
-      class="btn"
-    >
-      Delete All Monsters
-    </button>
-    <button
-      v-if="monsters !== backupMonsters && backupMonsters.length > 0"
-      @click="restoreMonsters()"
-      class="btn"
-    >
-      Restore Monster(s)
-    </button>
+    <div class="intro-paragraph">
+      <DamageForm
+        :monsters="monsters"
+        @sendDeleteAllMonsters="deleteAllMonsters()"
+        @sendRestoreMonsters="restoreMonsters()"
+        @sendSmack="smackIt($event)"
+      ></DamageForm>
+    </div>
 
     <div class="monsters">
       <template v-for="(monster, index) in monsters" :key="index">
@@ -160,6 +152,7 @@ export default {
     },
     smackIt(damage) {
       this.hit = damage;
+      console.log(damage);
       setTimeout(() => {
         this.hit = 0;
       }, 1000);
@@ -320,32 +313,30 @@ h1 {
   margin: 0 auto;
 }
 
-.introduction {
-  .intro-paragraph {
-    padding: 2rem;
-    background-color: black;
-    border-radius: 1rem;
-    margin-bottom: 3rem;
-    text-align: left;
-    h2 {
-      font-size: 1.4rem;
-      color: orange;
-      margin: 0;
-    }
-    p {
-      color: white;
-      font-size: 1.2rem;
-      line-height: 1.5;
-    }
-    a {
-      color: #dfdfa3;
-    }
-    p:last-child {
-      margin-bottom: 0;
-    }
-    @media screen and (max-width: 767px) {
-      padding: 1rem;
-    }
+.intro-paragraph {
+  padding: 2rem;
+  background-color: black;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+  text-align: left;
+  h2 {
+    font-size: 1.4rem;
+    color: orange;
+    margin: 0;
+  }
+  p {
+    color: white;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  a {
+    color: #dfdfa3;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 1rem;
   }
 }
 
@@ -450,14 +441,18 @@ footer {
     display: flex;
     justify-content: space-between;
     width: calc(100% - 6rem);
+    margin: 0 auto;
+    padding: 0;
   }
   p {
     color: white;
     margin: 0;
   }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 991px) {
     .container {
-      margin: 0 1rem;
+      width: 100%;
+      margin: 0;
+      padding: 0 1rem;
     }
   }
 }
