@@ -9,6 +9,12 @@
       <input id="damage" v-model="damage" type="number" min="0" />
     </div>
 
+    <select>
+      <template v-for="(monster, index) in monsters" :key="index">
+        <option>{{ index }} - {{ monster.name }}</option>
+      </template>
+    </select>
+
     <!-- <div class="form-field">
       <label for="resistance" class="label">Monster Resistance</label>
       <input id="resistance" v-model="resistance" type="number" max="100" min="0" />
@@ -37,6 +43,7 @@ export default {
   },
   props: {
     msg: String,
+    monsters: Array,
   },
   methods: {
     toReadable(num) {

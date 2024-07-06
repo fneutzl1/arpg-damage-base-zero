@@ -1,13 +1,15 @@
 <template>
+  <header>
+    <div class="title-fire">
+      <div class="title-inner">
+        <FireAnimated :flip="true"></FireAnimated>
+        <h1 v-html="title"></h1>
+        <FireAnimated></FireAnimated>
+      </div>
+    </div>
+  </header>
   <main class="container">
     <section class="introduction">
-      <div class="title-fire">
-        <div class="title-inner">
-          <FireAnimated :flip="true"></FireAnimated>
-          <h1 v-html="title"></h1>
-          <FireAnimated></FireAnimated>
-        </div>
-      </div>
       <div class="intro-paragraph">
         <h2>Welcome. Stay a while and listen...</h2>
         <p>
@@ -40,7 +42,7 @@
       </span>
     </template> -->
 
-    <DamageForm v-if="false"></DamageForm>
+    <DamageForm :monsters="monsters"></DamageForm>
 
     <button
       v-if="this.monsters.length > 0"
@@ -50,9 +52,7 @@
       Delete All Monsters
     </button>
     <button
-      v-if="
-        this.monsters !== this.backupMonsters && this.backupMonsters.length > 0
-      "
+      v-if="monsters !== backupMonsters && backupMonsters.length > 0"
       @click="restoreMonsters()"
       class="btn"
     >
@@ -89,31 +89,31 @@
             calculation on this page...
           </p>
         </div>
-        <pre><code><comment>// EXAMPLE CODE INCOMING -> 
+        <pre><code><adbz-comment>// EXAMPLE CODE INCOMING -> 
 // THE getDamage() FUNCTION IS THE MEAT. 
             
-// 123,456,789 dealt by player</comment>
-<h>const</h> damage <w>=</w> <n>123456789</n><w>;</w>
+// 123,456,789 dealt by player</adbz-comment>
+<adbz-h>const</adbz-h> damage <adbz-w>=</adbz-w> <adbz-n>123456789</adbz-n><adbz-w>;</adbz-w>
 
-<comment>// 10,000 damage monster cap</comment>
-<h>const</h> cap <w>=</w> <n>10000</n><w>;</w>
+<adbz-comment>// 10,000 damage monster cap</adbz-comment>
+<adbz-h>const</adbz-h> cap <adbz-w>=</adbz-w> <adbz-n>10000</adbz-n><adbz-w>;</adbz-w>
           
-<comment>// Simple Monster Resillience Function</comment>
-<h>static</h> <y>getDamage</y><b>(</b>damage<w>:</w> <type>Number</type><w>,</w> cap<w>:</w> <type>Number</type><b>)</b><w>:</w> <type>Number</type> <b>{</b>
-  <r>return</r> damage <w>>=</w> cap <w>?</w> damage <w>+</w> Math<w>.</w><y>log10</y><y2>(</y2>damage <w>/</w> cap<y2>)</y2> <w>*</w> cap <w>:</w> damage<w>;</w>
-<b>}</b>
+<adbz-comment>// Simple Monster Resillience Function</adbz-comment>
+<adbz-h>static</adbz-h> <adbz-y>getDamage</adbz-y><adbz-b>(</adbz-b>damage<adbz-w>:</adbz-w> <adbz-type>Number</adbz-type><adbz-w>,</adbz-w> cap<adbz-w>:</adbz-w> <adbz-type>Number</adbz-type><adbz-b>)</adbz-b><adbz-w>:</adbz-w> <adbz-type>Number</adbz-type> <adbz-b>{</adbz-b>
+  <adbz-r>return</adbz-r> damage <adbz-w>>=</adbz-w> cap <adbz-w>?</adbz-w> damage <adbz-w>+</adbz-w> Math<adbz-w>.</adbz-w><adbz-y>log10</adbz-y><adbz-y2>(</adbz-y2>damage <adbz-w>/</adbz-w> cap<adbz-y2>)</adbz-y2> <adbz-w>*</adbz-w> cap <adbz-w>:</adbz-w> damage<adbz-w>;</adbz-w>
+<adbz-b>}</adbz-b>
 
-<comment>// HUMAN MORE READABLE EXPLANATION</comment>
-<h>const</h> d <w>=</w> damage<w>;</w>
-<h>const</h> x <w>=</w> cap<w>;</w>
+<adbz-comment>// HUMAN MORE READABLE EXPLANATION</adbz-comment>
+<adbz-h>const</adbz-h> d <adbz-w>=</adbz-w> damage<adbz-w>;</adbz-w>
+<adbz-h>const</adbz-h> x <adbz-w>=</adbz-w> cap<adbz-w>;</adbz-w>
 
-<r>if</r> <y2>(</y2>d <w>>=</w> x<y2>)</y2> <y2>{</y2>
-  damage <w>=</w> x <w>+</w> Math<w>.</w><y>log10</y><b>(</b>d <w>/</w> x<b>)</b> <w>*</w> x<w>;</w>
-<y2>}</y2> <r>else</r> <y2>{</y2>
-  damage <w>=</w> d<w>;</w>
-<y2>}</y2>
+<adbz-r>if</adbz-r> <adbz-y2>(</adbz-y2>d <adbz-w>>=</adbz-w> x<adbz-y2>)</adbz-y2> <adbz-y2>{</adbz-y2>
+  damage <adbz-w>=</adbz-w> x <adbz-w>+</adbz-w> Math<adbz-w>.</adbz-w><adbz-y>log10</adbz-y><adbz-b>(</adbz-b>d <adbz-w>/</adbz-w> x<adbz-b>)</adbz-b> <adbz-w>*</adbz-w> x<adbz-w>;</adbz-w>
+<adbz-y2>}</adbz-y2> <adbz-r>else</adbz-r> <adbz-y2>{</adbz-y2>
+  damage <adbz-w>=</adbz-w> d<adbz-w>;</adbz-w>
+<adbz-y2>}</adbz-y2>
 
-<comment>// BRING YOUR OWN POTATOES.</comment></code></pre>
+<adbz-comment>// BRING YOUR OWN POTATOES.</adbz-comment></code></pre>
       </div>
     </section>
   </main>
@@ -156,7 +156,6 @@ export default {
   methods: {
     getCopyrightYears() {
       const yearNow = new Date().getFullYear();
-      console.log(yearNow);
       return yearNow === 2024 ? yearNow : `2024 - ${yearNow}`;
     },
     smackIt(damage) {
@@ -244,8 +243,11 @@ export default {
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 
+html {
+  overflow-x: hidden;
+}
 body {
-  //background-color: black;
+  overflow-x: hidden;
   padding: 2rem;
   background: linear-gradient(
       90deg,
@@ -255,8 +257,11 @@ body {
       #111217 100%
     )
     center 0px repeat-y;
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 991px) {
     padding: 1rem;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 0.5rem;
   }
 }
 #app {
@@ -338,6 +343,9 @@ h1 {
     p:last-child {
       margin-bottom: 0;
     }
+    @media screen and (max-width: 767px) {
+      padding: 1rem;
+    }
   }
 }
 
@@ -395,38 +403,38 @@ pre {
     margin-bottom: 0.5rem;
   }
 }
-pre comment {
+pre adbz-comment {
   color: #7aa25f;
 }
-pre a {
+pre adbz-a {
   color: #808080;
 }
-pre h {
+pre adbz-h {
   color: #5c9ddd;
 }
-pre c {
+pre adbz-c {
   color: #dca58c;
 }
-content,
-w {
+adbz-content,
+adbz-w {
   color: #ebebeb;
 }
-pre r {
+pre adbz-r {
   color: #bb86c0;
 }
-pre y {
+pre adbz-y {
   color: #dcdc8b;
 }
-pre y2 {
+pre adbz-y2 {
   color: #ffc814;
 }
-pre type {
+pre adbz-type {
   color: #3ac9a2;
 }
-pre b {
+pre adbz-b {
   color: #1a9fdb;
 }
-pre n {
+pre adbz-n {
   color: #b5cea8;
 }
 
@@ -447,6 +455,11 @@ footer {
     color: white;
     margin: 0;
   }
+  @media screen and (max-width: 767px) {
+    .container {
+      margin: 0 1rem;
+    }
+  }
 }
 
 .monsters {
@@ -456,11 +469,21 @@ footer {
   padding: 1rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
+  @media screen and (max-width: 767px) {
+    padding: 0rem;
+  }
 }
 
 .add-mob-container {
   width: calc(33.3333% - 2rem);
-  background-color: rgba(0, 0, 0, 0.5);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5) 10px,
+    rgba(0, 0, 0, 0.4) 10px,
+    rgba(0, 0, 0, 0.4) 20px
+  );
+  background-color: rgba(59 59 59 / 50%);
   border-radius: 1rem;
   margin: 1rem;
   min-height: 260px;

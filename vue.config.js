@@ -10,7 +10,16 @@ module.exports = defineConfig({
         __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
       })
       return definitions
-    })
+    }),
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => ({
+        ...options,
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('adbz-')
+        }
+      }))
   },
   css: {
     loaderOptions: {

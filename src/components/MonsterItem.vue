@@ -2,7 +2,7 @@
   <div class="monster">
     <div class="bio">
       <div class="header">
-        <badge>{{ +index + 1 }}</badge>
+        <adbz-badge>{{ +index + 1 }}</adbz-badge>
         <h2 class="name">{{ monster?.name }}</h2>
         <button
           @click="$emit('sendDeleteMonster', { id: monster.id })"
@@ -55,11 +55,9 @@
         </div>
 
         <div class="form-item" style="background-color: red">
-          <label :for="`${key}-${monster.id}-life`" class="label"
-            >Max Life</label
-          >
+          <label :for="`life-${monster.id}`" class="label">Max Life</label>
           <input
-            :id="`${key}-${monster.id}-life`"
+            :id="`life-${monster.id}`"
             type="number"
             min="0"
             v-model="localMonster.life"
@@ -70,22 +68,24 @@
       <div v-if="monster.caps" class="damage-bucket-caps form-section">
         <h3 class="name">{{ monster?.name }}'s Damage Caps</h3>
         <div class="caps-container">
-          <template v-for="(item, key, i) in monster?.caps" :key="i">
+          <template v-for="(item, type, index) in monster?.caps" :key="index">
             <div
               class="form-item"
-              :style="'background-color:' + applyColor(key)"
+              :style="'background-color:' + applyColor(type)"
               v-if="item"
             >
-              <div v-if="isDisabled(key)" class="disabled-cap">Coming Soon</div>
-              <label :for="`${key}-${monster.id}`" class="label">{{
-                key
+              <div v-if="isDisabled(type)" class="disabled-cap">
+                Coming Soon
+              </div>
+              <label :for="`${type}-${monster.id}`" class="label">{{
+                type
               }}</label>
               <input
-                :id="`${key}-${monster.id}`"
+                :id="`${type}-${monster.id}`"
                 type="number"
                 min="0"
                 v-model="item.value"
-                :tabindex="isDisabled(key) ? 1 : 0"
+                :tabindex="isDisabled(type) ? 1 : 0"
               />
             </div>
           </template>
@@ -111,10 +111,10 @@ export default {
     monster: Object,
     monsterCount: Number,
     index: Number,
+    theKey: Number,
   },
   methods: {
     isDisabled(key) {
-      console.log(key !== "physical");
       return key !== "physical";
     },
     applyColor(key) {
@@ -126,7 +126,6 @@ export default {
     },
     smackIt(type) {
       console.log(type);
-
       return type;
     },
     // GET DAMAGE CALC
@@ -185,7 +184,7 @@ export default {
 
 .header {
   display: flex;
-  badge {
+  adbz-badge {
     display: flex;
     width: 100px;
     background-color: #cfbe71;
