@@ -48,10 +48,22 @@
         @sendDeleteAllMonsters="deleteAllMonsters()"
         @sendRestoreMonsters="restoreMonsters()"
         @sendSmack="smackIt($event)"
+        @sendAddRandomMonster="addRandomMonster()"
+        @sendDeleteMonster="deleteMonster($event)"
+        @sendUpdateMonsterCap="updateMonsterCap($event)"
+        @sendUpdateMonsterLife="updateMonsterLife($event)"
       ></DamageForm>
     </div>
 
     <div class="monsters">
+      <div class="intro-paragraph" style="width: 100%; margin: 1rem">
+        <h2>Monster details</h2>
+        <p>
+          This section is a work in progress. Eventually it might capture
+          monster life after several "hits," and different types of caps /
+          immunities.
+        </p>
+      </div>
       <template v-for="(monster, index) in monsters" :key="index">
         <MonsterItem
           :monster="monster"
@@ -146,6 +158,35 @@ export default {
     FireAnimated,
   },
   methods: {
+    updateMonsterLife(data) {
+      console.log(data);
+      this.monsters = this.monsters.map((monster) => {
+        if (monster.id === data.monster.id) {
+          return {
+            ...monster,
+            life: data.life,
+            lifeLeft: data.life - data.damage,
+            lifeLeftResilience: Math.round(data.life - data.output),
+          };
+        }
+        return monster;
+      });
+      console.log(this.monsters);
+    },
+    updateMonsterCap(data) {
+      this.monsters = this.monsters.map((monster) => {
+        if (monster.id === data.monster.id) {
+          return {
+            ...monster,
+            caps: {
+              ...monster.caps,
+              physical: { value: data.cap },
+            },
+          };
+        }
+        return monster;
+      });
+    },
     getCopyrightYears() {
       const yearNow = new Date().getFullYear();
       return yearNow === 2024 ? yearNow : `2024 - ${yearNow}`;
@@ -183,10 +224,10 @@ export default {
       if (random >= 31 && random <= 45) type = "venom-lord";
       if (random >= 46 && random <= 60) type = "fetish-shaman";
       if (random >= 61 && random <= 75) type = "hell-bovine";
-      if (random >= 76 && random <= 90) type = "moon-lord";
-      if (random >= 91 && random <= 95) type = "mephisto";
-      if (random >= 96 && random <= 99) type = "uber-duriel";
-      if (random === 100) type = "uber-diablo";
+      if (random >= 76 && random <= 89) type = "moon-lord";
+      if (random >= 90 && random <= 94) type = "mephisto";
+      if (random >= 95 && random <= 97) type = "uber-duriel";
+      if (random >= 98) type = "uber-diablo";
 
       const mob = defaultMonsterData[type];
 
