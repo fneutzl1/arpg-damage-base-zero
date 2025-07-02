@@ -20,13 +20,6 @@
           monsters.
         </p>
         <p>
-          <a
-            href="https://us.forums.blizzard.com/en/d4/t/monster-resilience-to-prevent-crazy-unintended-spikes-of-damage-bugs-etc/177039"
-            target="_blank"
-            >The original post can be found on the Blizzard D4 Forums here.</a
-          >
-        </p>
-        <p>
           The calculator below let's you spawn monsters randomly and attack
           them. You'll see the unmodified damage output alongside the reduced
           amount.
@@ -104,7 +97,7 @@
           
 <adbz-comment>// Simple Monster Resillience Function</adbz-comment>
 <adbz-h>static</adbz-h> <adbz-y>getDamage</adbz-y><adbz-b>(</adbz-b>damage<adbz-w>:</adbz-w> <adbz-type>Number</adbz-type><adbz-w>,</adbz-w> cap<adbz-w>:</adbz-w> <adbz-type>Number</adbz-type><adbz-b>)</adbz-b><adbz-w>:</adbz-w> <adbz-type>Number</adbz-type> <adbz-b>{</adbz-b>
-  <adbz-r>return</adbz-r> damage <adbz-w>>=</adbz-w> cap <adbz-w>?</adbz-w> damage <adbz-w>+</adbz-w> Math<adbz-w>.</adbz-w><adbz-y>log10</adbz-y><adbz-y2>(</adbz-y2>damage <adbz-w>/</adbz-w> cap<adbz-y2>)</adbz-y2> <adbz-w>*</adbz-w> cap <adbz-w>:</adbz-w> damage<adbz-w>;</adbz-w>
+  <adbz-r>return</adbz-r> damage <adbz-w>>=</adbz-w> cap <adbz-w>?</adbz-w> cap <adbz-w>+</adbz-w> Math<adbz-w>.</adbz-w><adbz-y>log10</adbz-y><adbz-y2>(</adbz-y2>damage <adbz-w>/</adbz-w> cap<adbz-y2>)</adbz-y2> <adbz-w>*</adbz-w> cap <adbz-w>:</adbz-w> damage<adbz-w>;</adbz-w>
 <adbz-b>}</adbz-b>
 
 <adbz-comment>// HUMAN MORE READABLE EXPLANATION</adbz-comment>
@@ -378,6 +371,14 @@ h1 {
   }
   @media screen and (max-width: 767px) {
     padding: 1rem;
+  }
+}
+
+.introduction  {
+  .intro-paragraph {
+    p {
+      padding: .5rem 0;
+    }
   }
 }
 

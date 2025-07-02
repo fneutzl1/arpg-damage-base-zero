@@ -22,11 +22,8 @@
       </p>
     </div>
     <template v-for="(monster, index) in monsters" :key="index">
-      <button
-        class="item select-mob-btn"
-        @click="selectMonster(monster.id)"
-        :class="{ isSelected: selectedMonsterId === monster.id }"
-      >
+      <button class="item select-mob-btn" @click="selectMonster(monster.id)"
+        :class="{ isSelected: selectedMonsterId === monster.id }">
         <p class="smackedIt" v-if="selectedMonsterId === monster.id">
           {{ toReadable(damage) }}
         </p>
@@ -35,40 +32,27 @@
         </p>
         <div class="header">
           <p class="name">{{ +index + 1 }} - {{ monster.name }}</p>
-          <button
-            @click="$emit('sendDeleteMonster', { id: monster.id })"
-            class="delete-btn"
-            :title="`Delete ${monster?.name}`"
-          >
+          <button @click="$emit('sendDeleteMonster', { id: monster.id })" class="delete-btn"
+            :title="`Delete ${monster?.name}`">
             <i class="fa fa-trash" aria-hidden="true"></i>
           </button>
         </div>
         <div class="img-container">
-          <img
-            :src="getImage(monster?.type)"
-            :alt="monster?.name + ' animated'"
-            :class="{
-              isBovine:
-                monster?.type === 'hell-bovine' ||
-                monster?.type === 'moon-lord',
-            }"
-          />
+          <img :src="getImage(monster?.type)" :alt="monster?.name + ' animated'" :class="{
+            isBovine:
+              monster?.type === 'hell-bovine' ||
+              monster?.type === 'moon-lord',
+          }" />
         </div>
         <div class="life-container">
-          <div
-            class="life"
-            :style="`width: calc(${returnLifeVsDamage(
-              monster.id,
-              monster.life
-            )}% - 10px)`"
-          ></div>
-          <div
-            class="resilience"
-            :style="`width: calc(${returnResilienceVsDamage(
-              monster.id,
-              monster.life
-            )}% - 10px)`"
-          ></div>
+          <div class="life" :style="`width: calc(${returnLifeVsDamage(
+            monster.id,
+            monster.life
+          )}% - 10px)`"></div>
+          <div class="resilience" :style="`width: calc(${returnResilienceVsDamage(
+            monster.id,
+            monster.life
+          )}% - 10px)`"></div>
         </div>
       </button>
     </template>
@@ -86,38 +70,55 @@
       <input id="cap" v-model="cap" type="number" min="0" />
     </div> -->
     <div class="col">
-      <div class="form-field" v-if="monsterName() !== undefined">
-        <label for="cap" class="label"
-          >{{ monsterName() }} (physical) cap</label
-        >
-        <input
-          id="cap"
-          v-model="cap"
-          type="number"
-          min="0"
-          @change="
-            $emit('sendUpdateMonsterCap', { monster: getCorrectMonster(), cap })
-          "
-        />
-      </div>
+      <template v-if="monsterName()">
+        <h3>
+          {{ monsterName() }} controls
+        </h3>
 
-      <div class="form-field" v-if="monsterName() !== undefined">
-        <label for="life" class="label">{{ monsterName() }} total life</label>
-        <input
-          id="life"
-          v-model="life"
-          type="number"
-          min="0"
-          @change="
+        <div class="form-field">
+          <label for="cap" class="label">Physical cap <span>{{ resistPercent }}%</span></label>
+          <input id="cap" v-model="cap" type="number" min="0" step="10" @change="
+            $emit('sendUpdateMonsterCap', { monster: getCorrectMonster(), cap })
+            " />
+        </div>
+
+        <div class="form-field">
+          <label for="life" class="label">Total life</label>
+          <input id="life" v-model="life" type="number" min="0" @change="
             $emit('sendUpdateMonsterLife', {
               monster: getCorrectMonster(),
               life,
               damage,
               output,
             })
-          "
-        />
-      </div>
+            " />
+        </div>
+
+        <div class="form-field">
+          <label for="attackSpeed" class="label">Attack speed <span>(attack takes {{ secondsToCompleteAttack
+              }}s)</span></label>
+          <input id="attackSpeed" v-model="attackSpeed" type="number" min="10" max="2000" step="5" @change="
+            $emit('sendUpdateMonsterLife', {
+              monster: getCorrectMonster(),
+              life,
+              damage,
+              output,
+            })
+            " />
+        </div>
+
+        <div class="form-field">
+          <label for="numberOfHits" class="label">Hits <span>(same attack hits / projectiles)</span></label>
+          <input id="numberOfHits" v-model="numberOfHits" type="number" min="1" max="20" @change="
+            $emit('sendUpdateMonsterLife', {
+              monster: getCorrectMonster(),
+              life,
+              damage,
+              output,
+            })
+            " />
+        </div>
+      </template>
 
       <!-- <select v-model="selectedMonsterId" @change="selectedGoesWut()">
       <template v-for="(monster, index) in monsters" :key="index">
@@ -163,25 +164,30 @@
         </p>
         <br />
         <h4>
-          Damage after resilience = <span>{{ toReadable(output) }}</span>
+          Resilience damage per hit: <span>{{ toReadable(output) }}</span>
         </h4>
         <br />
         <div class="summary">
           <p>{{ monsterNameOnly() }}</p>
           <p class="text-life" v-if="isAliveLife()">
-            Has
-            <span>{{ toReadable(life - damage) }}</span> of
+            After the first hit
+            <span>{{ toReadable(life - (damage * numberOfHits)) }}</span> of
             {{ toReadable(life) }}
-            life left with no resilience
+            life with no Resilience
           </p>
-          <p class="text-life" v-else>Dies with no resilience</p>
+          <p class="text-life" v-else>Dies with no Resilience</p>
           <p class="text-res" v-if="isAliveResilience()">
-            Has
-            <span>{{ toReadable(life - output) }}</span> of
+            After the first hit
+            <span>{{ toReadable(life - (output * numberOfHits)) }}</span> of
             {{ toReadable(life) }}
-            left with resilience
+            life with Resilience
           </p>
           <p class="text-res" v-else>Dies with resilience</p>
+          <hr class="my-2" />
+          <p>Without Res dies in {{ swingsToKill(life, damage) }} hit(s) in <span>{{ timeToKill(life, damage) }}</span>
+            <br />With Res dies in {{ swingsToKill(life, output) }} hit(s) in <span>{{ timeToKill(life, output)
+              }}</span>
+          </p>
         </div>
       </div>
     </div>
@@ -208,10 +214,13 @@
 <script>
 export default {
   name: "DamageForm",
+  emits: ["sendDeleteAllMonsters", "sendRestoreMonsters", "sendSmack", "sendAddRandomMonster", "sendDeleteMonster", "sendUpdateMonsterCap", "sendUpdateMonsterLife"],
   data() {
     return {
       cap: 0,
-      damage: 500000,
+      damage: 5000,
+      attackSpeed: 100,
+      numberOfHits: 1,
       life: this.monsters?.[0]?.life ?? null,
       resistance: 0,
       selectedMonsterId: this.monsters?.[0]?.id ?? null,
@@ -255,7 +264,6 @@ export default {
         this.monsters.find((monster) => monster.id === this.selectedMonsterId)
           ?.life ?? 0;
       this.selectedGoesWut();
-      console.log(this.selectedMonsterId);
       const foundMonster = this.getCorrectMonster();
       if (foundMonster) {
         this.$emit("sendUpdateMonsterLife", {
@@ -301,15 +309,46 @@ export default {
       return Math.round(((monsterLife - this.output) / monsterLife) * 100);
       // return 20;
     },
+    swingsToKill(life, damage) {
+      //console.log(life, damage);
+      if (!life || life < 0 || (life - damage) <= 0) {
+        return 1;
+      }
+      const rounded = Math.ceil(life / damage);
+      return rounded?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ?? 0;
+    },
+    timeToKill(life, damage) {
+      const attackSpeedMath = (1 / (this.attackSpeed / 100)).toFixed(2);
+      if (!life || life < 0 || life - damage <= 0) {
+        return `${attackSpeedMath} second`;
+      }
+      const hits = Math.ceil(life / (damage * this.numberOfHits));
+      const totalSeconds = (hits * attackSpeedMath);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = (totalSeconds % 60).toFixed(2);
+      if (minutes > 1) {
+        return `${minutes} minutes and ${seconds} seconds`;
+      } else if (minutes === 1) {
+        return `${minutes} minute and ${seconds} seconds`;
+      }
+      return `${seconds} seconds`;
+    },
   },
   computed: {
+    resistPercent() {
+      return (100 - ((this?.cap / this.life).toFixed(4) * 100)).toFixed(2);
+    },
+    secondsToCompleteAttack() { return this?.attackSpeed ? (1 / (this.attackSpeed / 100)).toFixed(2) : 1 },
     resisted() {
       return this?.resistance / 100;
     },
     output() {
-      const damageDivideByCap = this?.damage / this?.cap;
-      const calc = +this?.cap + Math.log10(damageDivideByCap) * this?.cap;
-      return (this?.damage < this?.cap ? this?.damage : calc) ?? 0;
+      const attackSpeedMath = 1 / (this.attackSpeed / 100);
+      const theCap = this.cap;
+      console.log('theCap', theCap)
+      const damageDivideByCap = this?.damage / theCap;
+      const calc = ((+theCap + Math.log10(damageDivideByCap) * theCap)) * attackSpeedMath;
+      return (this?.damage < theCap ? this?.damage : calc) ?? 0;
     },
     log() {
       return Math.log10(this?.cap);
@@ -348,15 +387,22 @@ export default {
   background-color: #ebebeb;
   border-radius: 0.5rem;
   padding: 1rem;
+
   input {
     padding: 0.5rem;
     border-radius: 0.25rem;
     border: 1px solid black;
   }
 }
+
 .label {
   margin-right: 0.5rem;
   font-weight: bold;
+
+  span {
+    color: #777;
+    font-style: italic;
+  }
 }
 
 .btn-group {
@@ -366,6 +412,7 @@ export default {
   border-radius: 0 0 0.5rem 0.5rem;
   background-color: grey;
   width: 100%;
+
   @media screen and (max-width: 767px) {
     flex-direction: column;
   }
@@ -374,23 +421,29 @@ export default {
 .row {
   display: flex;
   flex-wrap: wrap;
+
   .col {
     width: 50%;
+
     p {
       color: white;
     }
   }
+
   .col-full {
     width: 100%;
     margin: 1rem 0.5rem 0;
+
     p {
       color: white;
     }
   }
+
   .right {
     margin-left: 1rem;
     width: calc(50% - 1rem);
   }
+
   @media screen and (max-width: 767px) {
     .col {
       width: 100%;
@@ -399,23 +452,33 @@ export default {
   }
 }
 
+h3 {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .damage-output {
   text-align: right;
   background-color: #222222;
   border-radius: 0.5rem;
   padding: 1rem;
+
   span {
     color: #d35c5c;
   }
+
   h3 {
     color: white;
     font-size: 1.5rem;
     border-bottom: 1px solid white;
     margin-bottom: 0.5rem;
   }
+
   h4 {
     color: gold;
     font-size: 1.6rem;
+
     span {
       color: rgb(221, 63, 221);
     }
@@ -430,9 +493,11 @@ export default {
     border-radius: 1rem;
     width: calc(230px - 1rem);
     overflow: hidden;
+
     @media screen and (max-width: 540px) {
       width: 100%;
     }
+
     .header {
       background-color: #141414;
       margin: -1rem -1rem 1rem;
@@ -441,12 +506,14 @@ export default {
       align-items: center;
       padding-left: 0.5rem;
     }
+
     .name {
       color: yellow;
       margin: 0;
       padding: 0;
       font-size: 1rem;
     }
+
     .img-container {
       width: 100%;
       height: 110px;
@@ -456,17 +523,20 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+
       img {
         object-fit: cover;
         margin-top: 20%;
       }
     }
+
     .life-container {
       width: 100%;
       height: 35px;
       background-color: #020202;
       display: flex;
       flex-direction: column;
+
       .life {
         width: calc(100% - 10px);
         height: 10px;
@@ -475,6 +545,7 @@ export default {
         transition: width 0.2s;
         transition-delay: 0.2s;
       }
+
       .resilience {
         width: calc(100% - 10px);
         height: 10px;
@@ -485,21 +556,26 @@ export default {
       }
     }
   }
+
   .select-mob-btn {
     outline: 2px solid transparent;
     text-align: left;
     position: relative;
+
     &:hover,
     &:focus {
       outline: 2px solid white;
     }
   }
+
   .isSelected {
     outline-color: yellow !important;
   }
 }
+
 .row-stretch {
   margin: 0 -0.5rem 1.5rem;
+
   @media screen and (max-width: 540px) {
     justify-content: center;
   }
@@ -518,6 +594,7 @@ export default {
   outline: transparent;
   border: 3px solid transparent;
   border-radius: 0 1rem 0 0;
+
   &:hover,
   &:focus {
     background-color: rgb(122, 27, 27);
@@ -534,15 +611,18 @@ export default {
     opacity: 0;
     transform: scale(0.2);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.2);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.2);
   }
 }
+
 .smackedIt {
   animation: smack 1s 1;
   opacity: 0;
@@ -555,6 +635,7 @@ export default {
   font-weight: bold;
   text-shadow: 0 0 1rem rgba(0, 0, 0, 0.7);
 }
+
 .resDamage {
   animation-delay: 0.2s;
   top: 50%;
@@ -564,17 +645,16 @@ export default {
 .add-mob-container {
   width: calc(230px - 1rem);
   min-height: 216px;
-  background: repeating-linear-gradient(
-    -45deg,
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5) 10px,
-    rgba(0, 0, 0, 0.4) 10px,
-    rgba(0, 0, 0, 0.4) 20px
-  );
+  background: repeating-linear-gradient(-45deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5) 10px,
+      rgba(0, 0, 0, 0.4) 10px,
+      rgba(0, 0, 0, 0.4) 20px);
   background-color: rgba(59 59 59 / 50%);
   border-radius: 1rem;
   margin: 0.5rem;
   position: relative;
+
   /*   @media screen and (max-width: 991px) {
     width: calc(50% - 2rem);
   }
@@ -584,6 +664,7 @@ export default {
   @media screen and (max-width: 540px) {
     width: 100%;
   }
+
   .btn {
     width: 160px;
     height: 160px;
@@ -596,6 +677,7 @@ export default {
     transition: all 0.2s;
     border: 4px solid transparent;
     outline: transparent;
+
     i {
       font-size: 30px;
       display: block;
@@ -604,30 +686,38 @@ export default {
       color: white;
       transition: transform 0.2s;
     }
+
     &:hover,
     &:focus {
       color: white;
       border: 4px solid rgba(255, 255, 255, 0.5);
+
       i {
         transform: scale(1.2);
       }
     }
   }
 }
+
 .summary {
   background-color: black;
   padding: 1rem;
+
   p {
     font-size: 1rem;
   }
+
   .text-res {
     color: rgb(221, 63, 221) !important;
+
     span {
       color: rgb(255, 140, 255) !important;
     }
   }
+
   .text-life {
     color: red !important;
+
     span {
       color: rgb(252, 84, 84) !important;
     }
